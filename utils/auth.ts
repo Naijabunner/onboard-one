@@ -20,13 +20,15 @@ export const signUpHandler =async(userData: SignUpProps)=>{
         statusCode= 200
     } catch (error) {
         Alert.alert(
-            'something Went wrong'
+              'sign up',
+            'something Went wrong '
         )
     }
     finally{
         return statusCode
     }
 }
+
 export const signInHandler =async(email:string,password:string)=>{
     let statusCode;
     try {
@@ -47,17 +49,18 @@ export const signInHandler =async(email:string,password:string)=>{
             email: parseValue?.email,
             password: parseValue?.password
         }
-        
-        const emailIsCorrect= transformedData.email ===email
-        const passwordIsCorrect= transformedData.email ===password
+        const emailIsCorrect= transformedData.email.toLowerCase() === email.toLowerCase()
+        const passwordIsCorrect= transformedData.password === password
             if (emailIsCorrect && passwordIsCorrect) {
                 statusCode= 200
+            }else{
+                throw ('something Went Wrong')
             }
-        // await AsyncStorage.setItem('user',strigifyValue)
         
     } catch (error) {
         Alert.alert(
-            'something Went wrong'
+            'sign in',
+            'something Went wrong '
         )
     }
     finally{

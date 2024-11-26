@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     },
     label:{
         fontSize:16,
-        fontWeight:'semibold',
+        fontWeight:'bold',
         color:Colors['primary-500']
     },
     inputContainer:{
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
       justifyContent:'space-between',
       alignItems:'center',
         borderColor:Colors['primary-500'],
-        borderWidth:1,
+        borderWidth:2,
         paddingHorizontal:20,
         paddingVertical:1,
         borderRadius:5

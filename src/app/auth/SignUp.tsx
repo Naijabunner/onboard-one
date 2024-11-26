@@ -30,9 +30,9 @@ function handlePress(){
   }
 
   async function handleSubmit(){
-  //  const response= await signUpHandler(signUpInput)
-  const response= await AsyncStorage.getItem('user')
-   console.log(response)
+   const response= await signUpHandler(signUpInput)
+  const check= await AsyncStorage.getItem('user')
+   console.log(check)
   //  router.navigate('/auth/VerifyEmailAddress')
   }
 
@@ -44,45 +44,43 @@ function handlePress(){
   const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
 
   return (
-    <View style={{ flex:1, backgroundColor:'white'}}>
-       <ScrollView >
-    <KeyboardAvoidingView
-   behavior='position'
-   >
-    <View style={styles.container}>
-    <Stack.Screen options={{ headerShown: false }} />
-      <LogoHeader title='Create An Account' />
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <ScrollView >
+        <KeyboardAvoidingView
+          behavior='position'
+        >
+          <View style={styles.container}>
+            <Stack.Screen options={{ headerShown: false }} />
+            <LogoHeader title='Create An Account' />
+            <View style={styles.formContainer}>
+              {SignUpForm.map(
+                ({ title, placeholder, name, type, isSecret }, index) => {
+                  return (
+                    <Input
+                      label={title}
+                      name={name}
+                      key={index}
+                      placeholder={placeholder}
+                      type={type}
+                      isSecret={isSecret}
+                      onChange={handleOnchangeInput}
+                    />
+                  );
+                }
+              )}
+              <Button title='SIGN UP' onPress={handleSubmit} style={styles.button} />
+            </View>
 
-      <View style={styles.formContainer}>
-        {SignUpForm.map(
-          ({ title, placeholder, name, type, isSecret }, index) => {
-            return (
-              <Input
-                label={title}
-                name={name}
-                key={index}
-                placeholder={placeholder}
-                type={type}
-                isSecret={isSecret}
-                onChange={handleOnchangeInput}
-              />
-            );
-          }
-        )}
+            <Pressable onPress={handlePress} style={styles.redirectText}>
+              <Text>
+                Have an account already? <Text style={styles.spanText}>Log in</Text>
+              </Text>
+            </Pressable>
+          </View>
 
-        <Button title='SIGN UP' onPress={handleSubmit} style={styles.button} />
-      </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
 
-      <Pressable onPress={handlePress} style={styles.redirectText}>
-        <Text>
-          Have an account already? <Text style={styles.spanText}>Log in</Text>
-        </Text>
-      </Pressable>
-    </View>
-     
-      </KeyboardAvoidingView>
-    </ScrollView>
-   
     </View>
    
   );

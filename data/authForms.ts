@@ -8,6 +8,6 @@ export const SignUpForm =[
     new SignUp('Confirm Password','*******','confirmPassword','text',true),
 ]
 export const SignInForm =[
-    new SignIn('Email Address','johndoe@email.com','name','text',false),
+    new SignIn('Email Address','johndoe@email.com','email','text',false),
     new SignIn('Password','*******','password','text', true),
 ]

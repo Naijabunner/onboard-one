@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  Image,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -16,7 +13,6 @@ import Button from "../../components/ui/button";
 import { SignInForm } from "../../../data/authForms";
 import LogoHeader from "../../components/ui/LogoHeader";
 import { RoutePathMap } from "../../../constants/Paths";
-import BottomSheetComponent from "../../components/ui/bottomSheet";
 import BottomSheet from "@gorhom/bottom-sheet";
 import ForgotPassword from "../../components/auth/forgotPassword";
 import { signInHandler } from "../../../utils/auth";
@@ -24,11 +20,29 @@ import { signInHandler } from "../../../utils/auth";
 const SignIn = () => {
   const router = useRouter();
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const [signInInput, setsignInInput] = useState({
+    email: '',
+    password: ''
+  })
 
   const forgotPasswordHandler = () => {
     bottomSheetRef.current?.expand();
   };
-  
+
+  const handleOnchangeInput = (name: string, value: string) => {
+    // @ts-ignore
+    setsignInInput({ ...signInInput, [name]: value })
+  }
+
+  const handleSubmitForm = async () => {
+    const { email, password } = signInInput
+    const res = await signInHandler(email, password)
+    console.log(res)
+    if (res === 200) {
+      router.replace('/dashboard/Home')
+    }
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Stack.Screen options={{ headerShown: false }} />
@@ -42,7 +56,7 @@ const SignIn = () => {
               key={index}
               placeholder={placeholder}
               type={type}
-              onChange={signInHandler}
+              onChange={handleOnchangeInput}
               isSecret={false}
             />
           );
@@ -61,7 +75,7 @@ const SignIn = () => {
         <Button
           title='LOG IN'
           style={styles.button}
-          onPress={forgotPasswordHandler}
+          onPress={handleSubmitForm}
         />
       </View>
       <Link href={RoutePathMap.get("signup")} style={styles.redirectText}>
