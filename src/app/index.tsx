@@ -1,15 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { Redirect } from 'expo-router'
-const index = () => {
- 
-  return (
-    <Redirect href={'/auth/onboard'} />
-  )
-}
+import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import { Redirect } from 'expo-router';
 
-export default index
+const Index = () => {
+
+  return (
+      <Redirect href={'/Home'} />
+  );
+};
+
+export default Index;
 
 const styles = StyleSheet.create({
- 
-})
+});

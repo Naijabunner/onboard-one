@@ -12,6 +12,7 @@ const Root = () => {
       <Stack initialRouteName='auth'>
         <Stack.Screen name='index' options={{ headerShown: false, title: "Category" }} />
         <Stack.Screen name='auth' options={{ headerShown: false, title: "" }} />
+        <Stack.Screen name='(tabs)' options={{ headerShown: false, title: "", contentStyle:{ backgroundColor:'white'} }} />
         {/* <Stack.Screen name='Home' options={{ headerShown: false, title: "" }} /> */}
       </Stack>
     </GestureHandlerRootView>

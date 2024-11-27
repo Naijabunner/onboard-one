@@ -67,3 +67,9 @@ export const signInHandler =async(email:string,password:string)=>{
         return statusCode
     }
 }
+
+
+export const isRegistered= async()=>{
+    const userDetails =await AsyncStorage.getItem('user')
+    return !!userDetails
+}

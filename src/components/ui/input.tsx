@@ -1,4 +1,4 @@
-import { InputModeOptions, KeyboardAvoidingView, NativeSyntheticEvent, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TextInputChangeEventData, View } from 'react-native'
+import { InputModeOptions, KeyboardAvoidingView, NativeSyntheticEvent, Platform, Pressable, ScrollView, StyleProp, StyleSheet, Text, TextInput, TextInputChangeEventData, View, ViewProps } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from '../../../constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
@@ -7,11 +7,12 @@ type inputProps={
     name:string,
     placeholder?:string,
     type:InputModeOptions,
-    isSecret:boolean
-    onChange:(name:string,value:string)=>void
+    isSecret:boolean,
+    style: StyleProp<ViewProps>
+    onChange:(name:string,value:string)=>void,
 }
 
-const Input: React.FC<inputProps> = ({ label, name, placeholder,type,isSecret, onChange }) => {
+const Input: React.FC<inputProps> = ({ label, name, placeholder,type,isSecret, onChange, style }) => {
   const [visible, setVisible] = useState(isSecret)
 
 function handleToggleVisibel() {
@@ -33,7 +34,8 @@ function handleOnchange(value: string){
     >
   <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.inputContainer}>
+      <View>
+      <View style={[styles.inputContainer, {borderWidth: 2, borderColor:'#df1d1d'}, style]}>
         <TextInput
           style={{ fontSize: 15, fontWeight: "medium" , flex:1}}
           placeholder={placeholder}
@@ -44,6 +46,11 @@ function handleOnchange(value: string){
        {isSecret && <Pressable onPress={handleToggleVisibel} >
         <Ionicons name={visible?'eye-off-outline':'eye-outline'} size={24}/>
         </Pressable>}
+        
+      </View>
+      <Text style={{ fontSize:16, marginVertical:0, color:'#df1d1d' }}>
+          password is not correct
+        </Text>
       </View>
     </View>
     </KeyboardAvoidingView>
